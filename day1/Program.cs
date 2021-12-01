@@ -3,11 +3,13 @@
   .Select(int.Parse)
   .ToArray();
 
+Range RangeFrom(int start, int length) => start..(start + length);
+
 int Measurements(int[] numbers, int winSize) {
     var increments = 0;
     for (var i = 0; i < numbers.Length - winSize; i++) {
-        var a = numbers[i..(i + winSize)].Sum();
-        var b = numbers[(i + 1)..(i + 1 + winSize)].Sum();
+        var a = numbers[RangeFrom(i, winSize)].Sum();
+        var b = numbers[RangeFrom(i+1, winSize)].Sum();
         if (a < b) increments++;
     }
     return increments;
